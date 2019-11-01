@@ -31,4 +31,8 @@ export class AuthService {
     const register_url=this.url+"register";
     return this.http.post<any>(register_url,payload,this.httpOptions);
   }
+
+  getToken(){
+    return localStorage.getItem("token");
+  }
 }
