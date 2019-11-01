@@ -4,7 +4,9 @@ const bcrypt=require('bcrypt');
 const joi=require("@hapi/joi");
 const uuid=require("uuid");
 
-const secret="SECRET_KEY123";
+require("dotenv/config");
+
+const secret=process.env.SECRET;
 
 const registerSchema=joi.object({
     id:joi.string().required(),
@@ -38,7 +40,7 @@ router.post("/",async function(req,res){
             id:new_user.id,
             email:new_user.email
         }
-        jwt.sign(payload,secret,{expiresIn:"60m"},function(err,token){
+        jwt.sign(payload,secret,{expiresIn:"30s"},function(err,token){
             if(err){
                 throw err;
             }

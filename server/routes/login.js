@@ -5,8 +5,9 @@ const jwt=require("jsonwebtoken");
 
 const router =express.Router();
 
+require("dotenv/config");
 
-const secret="SECRET_KEY123";
+const secret=process.env.SECRET;
 const data=require("../user_Data/data").users;
 
 const loginSchema=joi.object({
@@ -35,7 +36,7 @@ router.post("/",async function(req,res){
                     "id":auth_user.id,
                     "email":email
                 }
-                jwt.sign(payload,secret,function(err,token){
+                jwt.sign(payload,secret,{expiresIn:"30s"},function(err,token){
                     if(err){
                         throw err;
                     }

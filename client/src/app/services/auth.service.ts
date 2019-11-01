@@ -17,6 +17,9 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
+  getHomeData(){
+    return this.http.get(this.url);
+  }
   
   loginUser(payload){
     const login_url=this.url+"login";

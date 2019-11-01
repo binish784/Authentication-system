@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SignupComponent} from "./signup/signup.component";
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import {SignupComponent} from "./components/signup/signup.component";
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:SignupComponent},
-  {path:"",component:SignupComponent},
+  {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent,canActivate:[AuthGuard]},
 ];
 

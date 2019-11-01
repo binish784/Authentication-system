@@ -9,6 +9,7 @@ app.use(cors());
 
 app.use("/login",require("./routes/login"));
 app.use("/register",require("./routes/register"));
+app.use("/",require("./routes/home"));
 app.use("*",function(req,res){
     res.status(404).send({msg:"Not a valid api endpoint"});
 })
