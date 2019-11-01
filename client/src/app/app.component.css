@@ -1,0 +1,13 @@
+
+.container{
+    padding: 10px;
+}
+
+@media only screen and (min-width:768px){
+    .container{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 755px;
+    }
+}

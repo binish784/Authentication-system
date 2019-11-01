@@ -1,0 +1,16 @@
+<div class="clearfix">
+        <div class="form-title">{{title}}</div>
+        <div class="content">
+            Login-image / text goes here ,
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Rerum similique mollitia impedit sint iure neque, harum rem qui 
+            vel corrupti quisquam facere assumenda repudiandae, velit animi 
+            fugit! Provident, iure quo?
+        </div>
+        <div class="message">{{message}}</div>
+        <form class="form clearfix" (ngSubmit)="onSubmit()">
+            <input class="form-input" name="email" [(ngModel)]="email" type="email" placeholder="Enter email"><br>
+            <input class="form-input" name="password" [(ngModel)]="password" type="password" placeholder="Enter password"><br>
+            <input class="login-btn" type="submit" value="Login"><br>
+        </form>
+    </div>

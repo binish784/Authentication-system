@@ -1,0 +1,13 @@
+<div class="clearfix">
+    <div class="form-title">{{title}}</div>
+    <div class="content">
+        <img class="register-img" src="../assets/register_img.jpg">
+    </div>
+    <div class="message">{{message}}</div>
+    <form class="form clearfix" (ngSubmit)="onSubmit()">
+        <input class="form-input" name="username" [(ngModel)]="username" type="text" placeholder="Enter username"><br>
+        <input class="form-input" name="email" [(ngModel)]="email" type="email" placeholder="Enter email"><br>
+        <input class="form-input" name="password" [(ngModel)]="password" type="password" placeholder="Enter password"><br>
+        <input class="signUp-btn" type="submit" value="Signup"><br>
+    </form>
+</div>

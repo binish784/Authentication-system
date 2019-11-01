@@ -1,0 +1,20 @@
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+.nav-block{
+    padding:15px 0px;
+} 
+  
+.nav{
+    padding-right: 10px;
+    float: right;
+    left: 50%;
+}
+
+.nav a{
+    text-decoration: none;
+}

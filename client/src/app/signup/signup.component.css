@@ -1,0 +1,65 @@
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+.message{
+    background-color: rgb(32, 187, 66);
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.form-title{
+    font-size: 30px;
+    font-family: "arial";
+    padding: 20px 0px;
+    text-align: center;
+}
+
+.form-input{
+    width:90%;
+    border:0px;
+    border-bottom:1px grey solid;
+    padding: 10px 5px;
+    margin:10px 0px;
+}
+
+.form-input:focus{
+    outline: none;
+    border:none;
+    border-bottom:1px skyblue solid;
+}
+
+.signUp-btn{
+    padding: 10px;
+    margin-top: 10px;
+    background-color: royalblue;
+    color: white;
+    border-radius: 5px;
+    border:none;
+    float:right;
+}
+
+.content{
+    float: left;
+}
+
+.register-img{
+    width: 100%;
+    max-height: 200px;
+}
+
+@media only screen and (min-width:768px){
+    .form{
+        width:45%;
+        float:right;
+    }
+    .content{
+        padding: 15px;
+        display: block;
+        width: 50%;
+    }
+}
