@@ -10,6 +10,8 @@ require("dotenv/config");
 const secret=process.env.SECRET;
 const data=require("../user_Data/data").users;
 
+const User = require("../models/user");
+
 const loginSchema=joi.object({
     email:joi.string().required().email(),
     password:joi.string().required()
@@ -21,19 +23,13 @@ router.post("/",async function(req,res){
     if(validation.error){
         return res.status(400).send({msg:validation.error.details[0].message});
     }
-    let auth_user=null;
-    const exists=data.some(function(user){
-        if(user.email==email){
-            auth_user=user;
-            return true;
-        }
-    })
-    if(exists){
+    const auth_user=await User.findOne({email})
+    if(auth_user){
         try{
             const pass_match=await bcrypt.compare(password,auth_user.password);
             if(pass_match){
                 const payload={
-                    "id":auth_user.id,
+                    "username":auth_user.username,
                     "email":email
                 }
                 jwt.sign(payload,secret,{expiresIn:"30s"},function(err,token){

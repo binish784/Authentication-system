@@ -1,5 +1,10 @@
 const express= require("express");
 const cors=require("cors");
+const mongoose=require("mongoose");
+const dotenv = require("dotenv");
+
+require("dotenv/config");
+
 
 const app =new express();
 
@@ -21,5 +26,13 @@ app.listen(PORT,function(err){
         console.log("SERVER ERROR : PORT",PORT);
     }else{
         console.log("SERVER LISTENING ON PORT",PORT);
+    }
+})
+
+mongoose.connect(process.env.DB_CONNECTION,{ useNewUrlParser: true,useUnifiedTopology: true },function(err){
+    if(err){
+        console.log("DATABASE CONNECTION ERROR ",err);
+    }else{
+        console.log("DATABASE CONNECTED");
     }
 })

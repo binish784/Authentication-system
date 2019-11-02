@@ -2,28 +2,25 @@ const express=require("express");
 const jwt=require("jsonwebtoken");
 const bcrypt=require('bcrypt');
 const joi=require("@hapi/joi");
-const uuid=require("uuid");
 
 require("dotenv/config");
+
+const User = require("../models/user");
 
 const secret=process.env.SECRET;
 
 const registerSchema=joi.object({
-    id:joi.string().required(),
     username:joi.string().required().min(5),
     password:joi.string().required().min(6),
     email:joi.string().required().email()
 })
 
-let data=require("../user_Data/data").users;
 
 const router= express.Router();
 
 router.post("/",async function(req,res){
-    const id=uuid.v4();
     const {username,password,email}=req.body;
-    let new_user={
-        id,
+    const new_user={
         username,
         password,
         email
@@ -34,11 +31,16 @@ router.post("/",async function(req,res){
     }
     try{
         const salt=await bcrypt.genSalt(10);
-        new_user.password=await bcrypt.hash(new_user.password,salt);
-        data.push(new_user);
+        const hashed_password=await bcrypt.hash(password,salt);
+        const user= new User({
+            "username":username,
+            "password":hashed_password,
+            "email":email
+        })
+        await user.save();
         const payload={
-            id:new_user.id,
-            email:new_user.email
+            username,
+            email
         }
         jwt.sign(payload,secret,{expiresIn:"30s"},function(err,token){
             if(err){
@@ -56,8 +58,15 @@ router.post("/",async function(req,res){
     
 })
 
-router.get("/",function(req,res){
-    res.send(data);
+router.get("/",async function(req,res){
+    all_users=[]
+    await User.find().exec(function(err,users){
+        users.forEach(function(user,index){
+            all_users.push(user);
+            all_users[index].password=null;
+        })
+        res.send(all_users);
+    }); 
 })
 
 module.exports=router;
